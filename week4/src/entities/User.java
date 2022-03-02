@@ -20,7 +20,7 @@ public class User {
         this.email = "example@example.com";
     }
 
-    public User(String id, String firstName, String lastName, String middleName, String phone, String email){
+    public User(String firstName, String lastName, String middleName, String phone, String email){
         this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;

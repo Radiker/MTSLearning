@@ -31,16 +31,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUsers(List<Long> ids) {
-
+        List<User> users = new ArrayList<>();
+        for (Long id : ids) {
+            User user = userRepository.getBy(id.toString());
+            user.setStatus(UserStatus.DELETED);
+            users.add(user);
+        }
+        userRepository.saveAll(users);
     }
 
     @Override
-    public void updateUser() {
-
+    public User updateUser(String id, String firstName, String lastName, String middleName, String phone, String email){
+        User user = userRepository.getBy(id);
+        if(user.getStatus() == UserStatus.DELETED){
+            System.out.println("Can't update user with id " + user.getId() +", because it's status is DELETED");
+            return user;
+        }
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setMiddleName(middleName);
+        user.setPhone(phone);
+        user.setEmail(email);
+        return userRepository.save(user);
     }
 
     @Override
-    public void createUser() {
-
+    public User createUser(String firstName, String lastName, String middleName, String phone, String email) {
+        User user = new User(firstName, lastName, middleName, phone, email);
+        return userRepository.save(user);
     }
 }
