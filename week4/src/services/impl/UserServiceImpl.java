@@ -30,12 +30,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUsers(List<Long> ids) {
-        List<User> users = new ArrayList<>();
-        for (Long id : ids) {
-            User user = userRepository.getBy(id.toString());
-            user.setStatus(UserStatus.DELETED);
-            users.add(user);
+    public void deleteUsers(List<User> users) {
+        for (User user : users) {
+            User currentUser = userRepository.getBy(user.getId());
+            currentUser.setStatus(UserStatus.DELETED);
+            user = currentUser;
         }
         userRepository.saveAll(users);
     }
