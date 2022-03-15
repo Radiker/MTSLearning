@@ -1,7 +1,7 @@
-package services.impl;
+package service.impl;
 
 import entities.Client;
-import services.AdminService;
+import service.AdminService;
 
 public class AdminServiceImpl implements AdminService {
 

@@ -1,9 +1,9 @@
-package services.impl;
+package service.impl;
 
 import entities.User;
 import entities.UserStatus;
 import repository.UserRepository;
-import services.UserService;
+import service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;

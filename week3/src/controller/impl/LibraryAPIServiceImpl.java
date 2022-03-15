@@ -4,8 +4,8 @@ import controller.LibraryAPIService;
 import entities.Admin;
 import entities.Book;
 import entities.Client;
-import services.AdminService;
-import services.ClientService;
+import service.AdminService;
+import service.ClientService;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package services;
+package service;
 
 import entities.Book;
 import entities.Client;

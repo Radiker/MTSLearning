@@ -1,10 +1,9 @@
 import entities.User;
 import repository.UserRepository;
 import repository.impl.UserRepositoryImpl;
-import services.UserService;
-import services.impl.UserServiceImpl;
+import service.UserService;
+import service.impl.UserServiceImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {

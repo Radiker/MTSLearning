@@ -1,8 +1,8 @@
-package services.impl;
+package service.impl;
 
 import entities.Book;
 import entities.Client;
-import services.ClientService;
+import service.ClientService;
 
 import java.util.List;
 

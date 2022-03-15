@@ -3,10 +3,10 @@ import controller.impl.LibraryAPIServiceImpl;
 import entities.Admin;
 import entities.Book;
 import entities.Client;
-import services.AdminService;
-import services.ClientService;
-import services.impl.AdminServiceImpl;
-import services.impl.ClientServiceImpl;
+import service.AdminService;
+import service.ClientService;
+import service.impl.AdminServiceImpl;
+import service.impl.ClientServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
