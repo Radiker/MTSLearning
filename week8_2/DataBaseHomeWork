@@ -1,0 +1,80 @@
+//Задание 1
+Create Table Company(
+	id INT Primary key,
+	name VARCHAR NOT NULL
+);
+
+Create Table Trip(
+	id INT Primary key,
+	company INT NOT NULL REFERENCES Company,
+	plane VARCHAR NOT NULL,
+	town_from VARCHAR NOT NULL,
+	town_to VARCHAR NOT NULL,
+	time_out timestamp NOT NULL,
+	time_in timestamp NOT NULL
+);
+
+Create Table Passenger(
+	id INT Primary key,
+	name VARCHAR NOT NULL
+);
+
+Create Table Pass_in_trip(
+	id INT Primary key,
+	trip INT NOT NULL REFERENCES Trip,
+	passenger INT NOT NULL REFERENCES Trip,
+	place VARCHAR NOT NULL
+);
+
+//Задание 2
+//Вывести названия всех авиакомпаний
+SELECT name from Company
+
+//Задание 3
+//Вывести имена всех когда-либо обслуживаемых пассажиров авиакомпаний
+SELECT name FROM Passenger
+
+//Задание 4
+//Вывести все рейсы, совершенные из Москвы
+SELECT * FROM Trip WHERE town_from = 'Москва'
+
+//Задание 5
+//Вывести количество рейсов, совершенных на TU-134
+SELECT COUNT(*) FROM Trip WHERE plane = 'TU-134'
+
+//Задание 6
+//Какие компании организуют перелеты с Владивостока (Vladivostok)?
+SELECT DISTINCT company.name
+FROM company INNER JOIN trip on trip.company = company.id
+WHERE trip.town_from = 'Vladivostok'
+
+//Задание 7
+//Вывести отсортированный по количеству перелетов (по убыванию) и имени (по
+//возрастанию) список пассажиров, совершивших хотя бы 1 полет.
+SELECT COUNT(*), passenger.name
+FROM passenger INNER JOIN Pass_in_trip on Pass_in_trip.passenger = Passenger.id
+GROUP BY passenger.name
+HAVING COUNT(*) > 0
+ORDER BY COUNT(*) ASC, passenger.name DESC
+
+//Задание 8
+//Выведите нагруженность (число пассажиров) каждого рейса (trip).
+//Результат вывести в отсортированном виде по убыванию нагруженности
+SELECT COUNT(*), trip.id, trip.plane, trip.town_from, trip.town_to
+FROM trip INNER JOIN Pass_in_trip on Pass_in_trip.trip = trip.id
+GROUP BY trip.id
+ORDER BY COUNT(*) ASC
+
+//Задание 9
+//Выведите имена пассажиров улетевших в Москву (Moscow) на самолете TU-134.
+SELECT passenger.name
+FROM passenger
+INNER JOIN Pass_in_trip on Pass_in_trip.passenger = passenger.id
+INNER JOIN Trip on Pass_in_trip.trip = Trip.id
+WHERE trip.town_to = 'Moscow' and trip.plane = 'TU-134'
+
+//Задание 10
+//Сколько рейсов совершили авиакомпании из Ростова (Rostov) в Москву (Moscow)?
+SELECT count(*)
+FROM trip
+WHERE town_to = 'Moscow' and town_from = 'Rostov'
